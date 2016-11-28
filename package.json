@@ -1,0 +1,17 @@
+{
+  "name": "Google-Analytics-Account-Manager",
+  "version": "1.0.0",
+  "description": "management of large google analytics accounts",
+  "main": "server.js",
+  "dependencies": {
+    "express": "^4.14.0",
+    "express-request-proxy": "^2.0.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "jonathan.heemstra@gmail.com",
+  "license": "ISC"
+}
