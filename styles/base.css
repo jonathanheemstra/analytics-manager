@@ -1,0 +1,21 @@
+#auth-button {
+  border: none;
+  margin: 0;
+  padding: 0;
+  background-color: transparent;
+}
+
+.sign-in {
+  border: 1px solid black;
+  padding: 5%;
+  margin: 10% auto;
+  max-width: 50%;
+}
+
+.logo {
+  width: 30%;
+}
+
+.sign-in button img {
+  width: 50%;
+}
