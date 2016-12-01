@@ -11,10 +11,12 @@
     <link rel="stylesheet" href="/styles/state.css">
     <script id="account-table-template" type="text/x-handlebars-template">
       <tr class="account">
-        <td>{{account_id}}</td>
-        <td>{{account_site}}</td>
+        <td>{{id}}</td>
+        <td>{{name}}</td>
         <td class="expand">See all users</td>
       </tr>
+    </script>
+    <script id="account-users-template" type="text/x-handlebars-template">
       <tr class="account-users">
         <th>Remove</th>
         <th colspan=2>Email</th>
@@ -45,19 +47,6 @@
                 <th>ID</th>
                 <th>Name</th>
                 <th></th>
-              </tr>
-              <tr class="account">
-                <td>{{account_id}}</td>
-                <td>{{account_site}}</td>
-                <td class="expand">See all users</td>
-              </tr>
-              <tr class="account-users">
-                <th>Remove</th>
-                <th colspan=2>Email</th>
-              </tr>
-              <tr class="account-users list">
-                <td><input type="checkbox" name="name" value="{{user_email}}"></td>
-                <td>{{user_email}}</td>
               </tr>
             </tbody>
           </table>

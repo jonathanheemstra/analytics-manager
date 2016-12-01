@@ -8,11 +8,17 @@
   const $expand = $('.expand');
   const accountTableTemplate = Handlebars.compile($('#account-table-template').text());
 
-  accountListView.renderTable = function(data) {
+  accountListView.renderTable = function(currentAccount) {
     let source = $('#account-table-template').html();
     let template = Handlebars.compile(source);
-    return template(data);
+    return template(currentAccount);
   };
+
+  accountListView.renderPage = function(data) {
+    data.map(function(curr){
+      $('tbody').append(accountListView.renderTable(curr));;
+    });
+  }
 
   $accountPrintOut.hide();
   $accountUsers.hide();
@@ -25,6 +31,5 @@
   $expand.on('click', function(){
     $accountUsers.show();
   });
-
   module.accountListView = accountListView;
-}(window));
+})(window);

@@ -1,6 +1,7 @@
 'use strict';
 (function(module) {
   const accountList = {};
+
   accountList.allAccounts = [];
   accountList.accountIDs = [];
   accountList.allAccountUsers = [];
@@ -46,15 +47,16 @@
   function printAccounts(results) {
     if (results && !results.error) {
       const accounts = results.items;
-      accounts.forEach(function(account) {
+      accounts.forEach(account => {
         return accountList.allAccounts.push(account);
       });
-      accounts.forEach(function(accountIDs){
+      accounts.forEach(accountIDs => {
         return accountList.accountIDs.push(accountIDs.id);
       });
-      accounts.forEach(function(accountIDs){
+      accounts.forEach(accountIDs => {
         listAccountUserLinks(accountIDs.id);
       });
+      accountListView.renderPage(accountList.allAccounts);
     }
   }
 
@@ -68,11 +70,7 @@
   function printAccountUserLinks(results) {
     if (results && !results.error) {
       const accountLinks = results.items;
-      for (var i = 0, accountUserLink; accountUserLink = accountLinks[i]; i++) {
-        // var entity = accountUserLink.entity;
-        // var accountRef = entity.accountRef;
-        // var userRef = accountUserLink.userRef;
-        // var permissions = accountUserLink.permissions;
+      for (let i = 0, accountUserLink; accountUserLink = accountLinks[i]; i++) {
         accountList.allAccountUsers.push(accountUserLink);
       }
     }
@@ -82,4 +80,4 @@
   document.getElementById('auth-button').addEventListener('click', authorize);
 
   module.accountList = accountList;
-}(window));
+})(window);
