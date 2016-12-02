@@ -19,11 +19,13 @@
     <script id="account-users-template" type="text/x-handlebars-template">
       <tr class="account-users">
         <th>Remove</th>
-        <th colspan=2>Email</th>
+        <th>Email</th>
+        <th>Permissions</th>
       </tr>
       <tr class="account-users list">
-        <td><input type="checkbox" name="name" value="{{user_email}}"></td>
-        <td>{{user_email}}</td>
+        <td><input type="checkbox" name="name" value="{{userRef.email}}"></td>
+        <td>{{userRef.email}}</td>
+        <td>{{permissions.effective}}</td>
       </tr>
     </script>
   </head>
