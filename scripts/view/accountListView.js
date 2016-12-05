@@ -48,14 +48,14 @@
     });
   }
 
-  $accountPrintOut.hide();
-  $accountUsers.hide();
-
-
-  $signIn.on('click', 'button', function() {
-    $signIn.hide();
-    $accountPrintOut.fadeIn();
-  });
+  // $accountPrintOut.hide();
+  // $accountUsers.hide();
+  //
+  //
+  // $signIn.on('click', 'button', function() {
+  //   $signIn.hide();
+  //   $accountPrintOut.fadeIn();
+  // });
 
   $expand.on('click', function(){
     $accountUsers.show();

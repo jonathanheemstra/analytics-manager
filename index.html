@@ -36,11 +36,15 @@
           <h1>Easy Analytics Account Manager</h1>
           <a href="//www.google.com/analytics"><img src="/imgs/analytics_logo.png" alt="Google Analytics Logo" class="logo"/></a>
         </div>
-        <div class="row">
-          <button id="auth-button"><img src="/imgs/btn_normal.png" alt="Google Sign In Button"/></button>
+        <div class="row" id="auth-button">
+          <button><img src="/imgs/btn_normal.png" alt="Google Sign In Button"/></button>
+        </div>
+        <div class="row" id="upload-users">
+            <input type="file" name="upload-users" value="">
+            <button type="button" name="button">Add Users</button>
         </div>
       </section>
-      <section class="row text-left" id="account-printout">
+      <!-- <section class="row text-left" id="account-printout">
         <h1>Easy Analytics Account Manager</h1>
         <div class="table-responsive">
           <table class="table table-hover">
@@ -53,17 +57,16 @@
             </tbody>
           </table>
         </div>
-      </section>
+      </section> -->
     </main>
-    <footer>
-
-    </footer>
     <script src="https://apis.google.com/js/client.js?onload=authorize"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/page.js/1.7.1/page.min.js"></script>
     <script src="/scripts/model/accountList.js"></script>
+    <script src="/scripts/model/addUserModel.js"></script>
     <script src="/scripts/view/accountListView.js"></script>
+    <script src="/scripts/view/addUserView.js"></script>
   </body>
 </html>

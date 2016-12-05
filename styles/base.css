@@ -1,7 +1,7 @@
 body {
   background-color: #f6f6f6;
 }
-#auth-button {
+#auth-button button {
   border: none;
   margin: 0;
   padding: 0;
@@ -33,4 +33,15 @@ body {
 }
 .account-users {
   padding-left: 5%;
+}
+
+#upload-users button {
+  max-width: 382px;
+  max-height: 92px;
+  width: 50%;
+  height: 5%;
+  color: #fff;
+  border-radius: 2px;
+  background-color: rgb(87,135,234);
+  border-width: 0;
 }
