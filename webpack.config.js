@@ -6,34 +6,26 @@ const HTMLPlugin = require('html-webpack-plugin');
 const CleanPlugin = require('clean-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
-dotenv.load();
-
 const production = process.env.NODE_ENV === 'production';
+
+dotenv.load();
 
 let plugins = [
   new ExtractTextPlugin('bundle.css'),
-  new HTMLPlugin({
-    template: `${__dirname}/app/index.html`
-  }),
+  new HTMLPlugin({ template: `${__dirname}/app/index.html` }),
   new webpack.DefinePlugin({
     __API_URL__: JSON.stringify(process.env.API_URL),
     __DEBUG__: JSON.stringify(!production)
-  }),
-  new webpack.LoaderOptionsPlugin({
-    sassLoader: {
-      includePaths: [`${__dirname}/app/scss`]
-    }
   })
 ];
 
-if(production) {
+if (production) {
   plugins = plugins.concat([
     new webpack.optimize.UglifyJsPlugin({
-      sourceMap: true,
       mangle: true,
       compress: {
-        warnings: true
-      }
+        warnings: false
+      },
     }),
     new CleanPlugin()
   ]);
@@ -44,40 +36,34 @@ module.exports = {
   devtool: production ? false : 'eval',
   plugins,
   output: {
-    path: `${__dirname}/build`,
+    path: 'build',
     filename: 'bundle.js'
   },
+  sassLoader: {
+    includePaths: [`${__dirname}/app/scss/`]
+  },
   module: {
-    rules: [
+    loaders: [
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        use: 'babel-loader'
+        loader: 'babel'
       },
       {
         test: /\.html$/,
-        use: 'html-loader'
+        loader: 'html'
       },
       {
-        test: /\.(woff|ttf|svg|eot).*/,
-        loader: 'file-loader',
-        options: {
-          name: '[path][name].[hash].[ext]',
-        },
+        test: /\.(woff|tt|svg|eot).*/,
+        loader: 'url?limit=10000&name=image/[hash].[ext]'
       },
       {
         test: /\.(jpg|jpeg|svg|bmp|tiff|gif|png)$/,
-        loader: 'file-loader',
-        options: {
-          name: '[path][name].[hash].[ext]',
-        },
+        loader: 'url?limit=10000&name=image/[hash].[ext]'
       },
       {
         test: /\.scss$/,
-        loader: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: 'css-loader!resolve-url-loader!sass-loader?sourceMap',
-        })
+        loader: ExtractTextPlugin.extract('style', 'css!resolve-url!sass?sourceMap')
       }
     ]
   }
