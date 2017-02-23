@@ -1,3 +1,7 @@
-<section>
+<section ng-init="homeCtrl.load()">
   <h1>HOME</h1>
+  <button id="sign-in-or-out-button"
+          style="margin-left: 25px" ng-click="homeCtrl.login()">Sign In/Authorize</button>
+  <button id="revoke-access-button"
+          style="display: none; margin-left: 25px">Revoke access</button>
 </section>
