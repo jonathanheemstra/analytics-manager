@@ -1,12 +1,13 @@
 'use strict';
 
-module.exports = ['$q', '$log', authService];
+module.exports = ['$q', '$log', '$window', authService];
 
-function authService($q, $log) {
+function authService($q, $log, $window) {
   $log.debug('inside authService');
 
   let service = {};
 
+  let token = null;
   var GoogleAuth;
   var SCOPE = 'https://www.googleapis.com/auth/analytics.manage.users';
 
@@ -45,6 +46,7 @@ function authService($q, $log) {
   function setSigninStatus(isSignedIn) {
     var user = GoogleAuth.currentUser.get();
     var isAuthorized = user.hasGrantedScopes(SCOPE);
+    setToken(user.Zi.access_token);
     if (isAuthorized) {
       $('#sign-in-or-out-button').html('Sign out');
       $('#revoke-access-button').css('display', 'inline-block');
@@ -62,12 +64,45 @@ function authService($q, $log) {
     setSigninStatus();
   }
 
+  function setToken(_token){
+    $log.debug('authService.setToken()');
+
+    if (! _token) {
+      return $q.reject(new Error('no token'));
+    }
+
+    $window.localStorage.setItem('token', _token);
+    token = _token;
+    $log.debug('setToken', token);
+    return $q.resolve(token);
+  }
+
   service.loadGAPI = function() {
     handleClientLoad();
   };
 
   service.signIn = function() {
     handleAuthClick();
+  };
+
+  service.getToken = function(){
+    $log.debug('authService.getToken');
+    if (token) {
+      $log.debug('getToken', token);
+      return $q.resolve(token);
+    }
+
+    token = $window.localStorage.getItem('token');
+    if (token) return $q.resolve(token);
+    return $q.reject(new Error('token not found'));
+  };
+
+  service.logout = function(){
+    $log.debug('authService.logout()');
+
+    $window.localStorage.removeItem('token');
+    token = null;
+    return $q.resolve();
   };
 
   return service;
