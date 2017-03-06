@@ -20,9 +20,6 @@ function accountService($q, $log, $http, authService) {
         }
       };
       return $http.get(url, config);
-    })
-    .then( res => {
-      console.log('res', res);
     });
   };
 

@@ -5,6 +5,8 @@ module.exports = ['$log', '$rootScope', 'authService', 'accountService', HomeCon
 function HomeController($log, $rootScope, authService, accountService){
   $log.debug('init homeCtrl');
 
+  this.accounts = [];
+
   this.load = function() {
     authService.loadGAPI();
   };
@@ -14,7 +16,11 @@ function HomeController($log, $rootScope, authService, accountService){
   };
 
   this.getAccounts = function() {
-    accountService.getAccounts();
+    accountService.getAccounts()
+    .then( res => {
+      this.accounts = res.data.items;
+      return this.accounts;
+    });
   };
 
   $rootScope.$on('$locationChangeSuccess', () => {

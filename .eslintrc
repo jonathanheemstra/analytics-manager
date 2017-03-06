@@ -19,7 +19,10 @@
   },
   "globals": {
     "__DEBUG__": false,
-    "__API_URL__": false
+    "__API_URL__": false,
+    "__API_KEY__": false,
+    "__CLIENT_ID__": false,
+    "gapi": false
   },
   "extends": "eslint:recommended"
 }

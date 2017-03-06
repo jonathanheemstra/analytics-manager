@@ -6,4 +6,8 @@
           style="display: none; margin-left: 25px">Revoke access</button>
 
   <button ng-click="homeCtrl.getAccounts()">get accounts</button>
+
+  <ul>
+    <li ng-repeat="accounts in homeCtrl.accounts">{{ homeCtrl.accounts.name }}</li>
+  </ul>
 </section>

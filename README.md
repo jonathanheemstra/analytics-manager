@@ -19,3 +19,13 @@ Google Analytics account manager tool
 * [ ] Print list of Views to page
 * [ ] Allow user to search for emails that have access to a specific account
    * [ ] Show properties and views accessed nested under accounts
+
+## Components
+* NavBar
+* Footer
+* Search Box
+  * Filter
+* List
+  * Account List
+    * Profile List
+      * View List
