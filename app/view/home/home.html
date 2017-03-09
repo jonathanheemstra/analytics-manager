@@ -1,13 +1,3 @@
-<section ng-init="homeCtrl.load()">
+<section>
   <h1>HOME</h1>
-  <button id="sign-in-or-out-button"
-          style="margin-left: 25px" ng-click="homeCtrl.login()">Sign In/Authorize</button>
-  <button id="revoke-access-button"
-          style="display: none; margin-left: 25px">Revoke access</button>
-
-  <button ng-click="homeCtrl.getAccounts()">get accounts</button>
-
-  <ul>
-    <li ng-repeat="accounts in homeCtrl.accounts">{{ homeCtrl.accounts.name }}</li>
-  </ul>
 </section>

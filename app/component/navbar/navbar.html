@@ -1,0 +1,15 @@
+<section ng-init="navbarCtrl.load()">
+  <nav>
+    <div class="logo">
+      <a href="/#!/"><img src="http://placehold.it/150x75"></a>
+      <span class="title">Analytics Admin Manager</span>
+    </div>
+    <ul>
+      <li ng-if="!$rootScope.authenticationStatus"><button id="sign-in-or-out-button"
+              style="margin-left: 25px" ng-click="navbarCtrl.login()">Sign In</button></li>
+      <li ng-if="$rootScope.authenticationStatus"><button id="sign-in-or-out-button"
+              style="margin-left: 25px" ng-click="navbarCtrl.logout()">Sign Out</button></li>
+      <li ng-if="$rootScope.authenticationStatus"><button ng-click="navbarCtrl.getAccounts()">get accounts</button></li>
+    </ul>
+  </nav>
+</section>

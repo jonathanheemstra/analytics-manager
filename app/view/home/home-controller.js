@@ -11,10 +11,6 @@ function HomeController($log, $rootScope, authService, accountService){
     authService.loadGAPI();
   };
 
-  this.login = function() {
-    authService.signIn();
-  };
-
   this.getAccounts = function() {
     accountService.getAccounts()
     .then( res => {

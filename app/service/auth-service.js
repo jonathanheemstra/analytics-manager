@@ -1,8 +1,8 @@
 'use strict';
 
-module.exports = ['$q', '$log', '$window', authService];
+module.exports = ['$q', '$log', '$window', '$rootScope', authService];
 
-function authService($q, $log, $window) {
+function authService($q, $log, $window, $rootScope) {
   $log.debug('inside authService');
 
   let service = {};
@@ -12,10 +12,12 @@ function authService($q, $log, $window) {
   var SCOPE = 'https://www.googleapis.com/auth/analytics.manage.users';
 
   function handleClientLoad() {
+    $log.debug('authService.handleClientLoad');
     gapi.load('client:auth2', initClient);
   }
 
   function initClient() {
+    $log.debug('authService.initClient');
     var discoveryUrl = 'https://www.googleapis.com/discovery/v1/apis/analytics/v3/rest';
 
     gapi.client.init({
@@ -27,40 +29,36 @@ function authService($q, $log, $window) {
       GoogleAuth = gapi.auth2.getAuthInstance();
       GoogleAuth.isSignedIn.listen(updateSigninStatus);
       var user = GoogleAuth.currentUser.get();
+      $log.debug('authService.initClient user', user);
       setSigninStatus();
     });
   }
 
   function handleAuthClick() {
     if (GoogleAuth.isSignedIn.get()) {
+      $log.debug('authService.handleAuthClick IF');
       GoogleAuth.signOut();
     } else {
+      $log.debug('authService.handleAuthClick ELSE');
       GoogleAuth.signIn();
     }
   }
 
   function revokeAccess() {
+    $log.debug('authService.revokeAccess');
     GoogleAuth.disconnect();
   }
 
   function setSigninStatus(isSignedIn) {
+    $log.debug('authService.setSigninStatus');
     var user = GoogleAuth.currentUser.get();
     var isAuthorized = user.hasGrantedScopes(SCOPE);
     setToken(user.Zi.access_token);
-    if (isAuthorized) {
-      $('#sign-in-or-out-button').html('Sign out');
-      $('#revoke-access-button').css('display', 'inline-block');
-      $('#auth-status').html('You are currently signed in and have granted ' +
-          'access to this app.');
-    } else {
-      $('#sign-in-or-out-button').html('Sign In/Authorize');
-      $('#revoke-access-button').css('display', 'none');
-      $('#auth-status').html('You have not authorized this app or you are ' +
-          'signed out.');
-    }
+    $rootScope.authenticationStatus = true;
   }
 
   function updateSigninStatus(isSignedIn) {
+    $log.debug('authService.updateSigninStatus', isSignedIn);
     setSigninStatus();
   }
 
@@ -73,7 +71,6 @@ function authService($q, $log, $window) {
 
     $window.localStorage.setItem('token', _token);
     token = _token;
-    $log.debug('setToken', token);
     return $q.resolve(token);
   }
 
@@ -88,7 +85,7 @@ function authService($q, $log, $window) {
   service.getToken = function(){
     $log.debug('authService.getToken');
     if (token) {
-      $log.debug('getToken', token);
+      $log.debug('authService.getToken', token);
       return $q.resolve(token);
     }
 
@@ -99,9 +96,11 @@ function authService($q, $log, $window) {
 
   service.logout = function(){
     $log.debug('authService.logout()');
+    handleAuthClick();
 
     $window.localStorage.removeItem('token');
     token = null;
+    $rootScope.authenticationStatus = false;
     return $q.resolve();
   };
 
