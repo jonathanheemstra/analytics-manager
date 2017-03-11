@@ -10,6 +10,10 @@ Google Analytics account manager tool
 
 [User Management Overview](https://developers.google.com/analytics/devguides/config/mgmt/v3/user-management)
 
+[Analytics Routes](https://developers.google.com/apis-explorer/#p/analytics/v3/)
+
+[OAuth](https://developers.google.com/identity/protocols/OAuth2UserAgent)
+
 ## TODO:
 * [x] Create array of Accounts Accessed Objects
 * [ ] Create array of Properties Accessed Objects
